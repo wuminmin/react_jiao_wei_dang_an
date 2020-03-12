@@ -23,24 +23,30 @@ const mockTableData = [];
 
 for (let i = 0; i <= 10; i += 1) {
   mockTableData.push({
-    name: `品牌营销服务设计 ${String.fromCharCode(97 + i).toUpperCase()}`,
-    type: Math.random() > 0.5 ? '24小时页面' : 'Banner 广告A',
-    demand: ['曾庆超', '阮小五', '公孙胜'][i % 3],
-    interface: ['阮小二', '谢莉莉', '樊瑞'][i % 3],
-    supplier: '博彦-李强',
-    designer: ['李立', '曹正', '姚越洋'][i % 3],
+    // name: `品牌营销服务设计 ${String.fromCharCode(97 + i).toUpperCase()}`,
+    name:'张老师',
+    // type: Math.random() > 0.5 ? '24小时页面' : 'Banner 广告A',
+    type:'城西小学',
+    // demand: ['曾庆超', '阮小五', '公孙胜'][i % 3],
+    demand:'189xxxxxxx',
+    interface:'男',
+    supplier:'群众',
+    designer:'初级教师',
+    // interface: ['阮小二', '谢莉莉', '樊瑞'][i % 3],
+    // supplier: '博彦-李强',
+    // designer: ['李立', '曹正', '姚越洋'][i % 3],
   });
 }
 
 const DEFAULT_DATA = {
   tableData: mockTableData,
   tableColumn: {
-    name: '需求名称',
-    type: '类型数量',
-    demand: '需求方',
-    interface: '接口人',
-    supplier: '供应商接口人',
-    designer: '设计师',
+    name: '姓名',
+    type: '学校',
+    demand: '手机号',
+    interface: '性别',
+    supplier: '政治面貌',
+    designer: '职称',
   },
 };
 
@@ -72,22 +78,50 @@ const TableList = props => {
         <Card.Content>
           <Box padding={10}>
             <Form responsive fullWidth labelAlign="top">
-              <FormItem colSpan={3} label="需求名称/编号">
-                <Input
-                  placeholder="输入需求名称/编号进行搜索"
-                  innerAfter={<Icon type="search" size="xs" className={styles.searchIcon} />}
-                />
+              <FormItem colSpan={3} label="姓名">
+                <Input placeholder="输入" />
               </FormItem>
-              <FormItem colSpan={3} label="需求方">
-                <Input placeholder="输入需求方进行搜索" />
+              <FormItem colSpan={3} label="手机号">
+                <Input placeholder="输入" />
               </FormItem>
-              <FormItem colSpan={3} label="标签">
-                <Select placeholder="选择标签">
-                  <Option value="small">标签A</Option>
-                  <Option value="medium">标签B</Option>
+              <FormItem colSpan={3} label="身份证号码">
+                <Input placeholder="输入" />
+              </FormItem>
+              <FormItem colSpan={3} label="性别">
+                <Select placeholder="选择">
+                  <Option value="0"></Option>
+                  <Option value="1">男</Option>
+                  <Option value="2">女</Option>
                 </Select>
               </FormItem>
-              {expand && (
+              <FormItem colSpan={3} label="政治面貌">
+                <Select placeholder="选择">
+                  <Option value="0">无</Option>
+                  <Option value="1">团员</Option>
+                  <Option value="2">党员</Option>
+                  <Option value="3">群众</Option>
+                  <Option value="4">其他</Option>
+                </Select>
+              </FormItem>
+              <FormItem colSpan={3} label="学校">
+                <Input placeholder="输入" />
+              </FormItem>
+              <FormItem colSpan={3} label="工龄">
+                <Input placeholder="输入" />
+              </FormItem>
+              <FormItem colSpan={3} label="职称">
+                <Input placeholder="输入" />
+              </FormItem>
+              <FormItem colSpan={3} label="获取职称时间">
+                <Input placeholder="输入" />
+              </FormItem>
+              <FormItem colSpan={3} label="奖励">
+                <Input placeholder="输入" />
+              </FormItem>
+              <FormItem colSpan={3} label="获取奖励时间">
+                <Input placeholder="输入" />
+              </FormItem>
+              {/* {expand && (
                 <>
                   <FormItem colSpan={3} label="需求名称/编号">
                     <Input
@@ -111,7 +145,7 @@ const TableList = props => {
                     </Select>
                   </FormItem>
                 </>
-              )}
+              )} */}
               <Cell colSpan={3} className={styles.btns}>
                 <Box
                   spacing={8}
@@ -126,7 +160,7 @@ const TableList = props => {
                     查询
                   </Button>
                   <Form.Reset>重置</Form.Reset>
-                  <Button onClick={toggleSeachList}>
+                  {/* <Button onClick={toggleSeachList}>
                     {expand ? (
                       <>
                         收起 <Icon className={styles.icon} type="arrow-up" size="xs" />
@@ -136,7 +170,7 @@ const TableList = props => {
                         展开 <Icon className={styles.icon} type="arrow-down" size="xs" />
                       </>
                     )}
-                  </Button>
+                  </Button> */}
                 </Box>
               </Cell>
             </Form>
@@ -145,12 +179,12 @@ const TableList = props => {
           <div className={styles.Main}>
             <Loading visible={loading}>
               <div className={styles.add}>
-                <Button type="primary">新增</Button>
-                <Button type="normal">下载</Button>
-                <Button type="normal">
+                {/* <Button type="primary">新增</Button> */}
+                <Button type="primary">下载</Button>
+                {/* <Button type="normal">
                   更多操作
                   <Icon className={styles.icon} type="arrow-down" />
-                </Button>
+                </Button> */}
               </div>
               <Table
                 hasBorder={false}
@@ -170,11 +204,11 @@ const TableList = props => {
                   cell={() => (
                     <div className={styles.opt}>
                       <Button type="primary" text>
-                        编辑
+                        查看
                       </Button>
                       <Divider direction="ver" />
                       <Button type="primary" text>
-                        订阅
+                        编辑
                       </Button>
                       <Divider direction="ver" />
                       <Button type="primary" text>

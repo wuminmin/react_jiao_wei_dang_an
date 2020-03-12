@@ -9,16 +9,16 @@ const FormGroup = () => (
   <ResponsiveGrid gap={20}>
     <Cell colSpan={12}>
       <PageHeader
-        title="分组表单"
-        description="分组表单分组表单分组表单分组表单分组表单分组表单分组表单"
-        breadcrumbs={[
-          {
-            name: '表单页面',
-          },
-          {
-            name: '分组表单',
-          },
-        ]}
+        title="录入信息"
+        description="按分组录入教师信息"
+        // breadcrumbs={[
+        //   {
+        //     name: '表单页面',
+        //   },
+        //   {
+        //     name: '分组表单',
+        //   },
+        // ]}
       />
     </Cell>
 

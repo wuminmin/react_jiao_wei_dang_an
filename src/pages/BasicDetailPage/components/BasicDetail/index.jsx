@@ -4,11 +4,11 @@ import styles from './index.module.scss';
 
 const DEFAULT_DATA = {
   basicInfo: {
-    company: '蚂蚁证券投资有限公司',
-    code: 'ALXM890392-94890',
-    committee: '经济体投资委员会',
-    trade: '新零售',
-    aliasProject: '杭州阿里巴巴集团新零售',
+    company: '张老师',
+    code: '189xxxxxx',
+    committee: '男',
+    trade: '群众',
+    aliasProject: '341003xxxxxxx',
   },
   projectMember: {
     icMemeber:
@@ -32,32 +32,32 @@ const BasicDetail = props => {
     <div>
       <Box spacing={20}>
         <Card free>
-          <Card.Header title="基础信息" />
+          <Card.Header title="基本信息" />
           <Card.Divider />
           <Card.Content>
             <div className={styles.Content}>
               <Form labelAlign="top" responsive>
-                <Form.Item colSpan={4} label="公司简称" required>
+                <Form.Item colSpan={4} label="名称" required>
                   <span>{dataSource.basicInfo.company}</span>
                 </Form.Item>
-                <Form.Item colSpan={4} label="项目代号" required>
+                <Form.Item colSpan={4} label="手机号" required>
                   <span>{dataSource.basicInfo.code}</span>
                 </Form.Item>
-                <Form.Item colSpan={4} label="投资委员会" required>
+                <Form.Item colSpan={4} label="性别" required>
                   <span>{dataSource.basicInfo.committee}</span>
                 </Form.Item>
-                <Form.Item colSpan={4} label="所属行业" required>
+                <Form.Item colSpan={4} label="政治面貌" required>
                   <span>{dataSource.basicInfo.trade}</span>
                 </Form.Item>
-                <Form.Item colSpan={4} label="关联项目" required>
+                <Form.Item colSpan={4} label="身份证号码" required>
                   <span>{dataSource.basicInfo.aliasProject}</span>
                 </Form.Item>
               </Form>
             </div>
           </Card.Content>
         </Card>
-        <Card free>
-          <Card.Header title="项目成员信息" />
+        {/* <Card free>
+          <Card.Header title="工作信息" />
           <Card.Divider />
           <Card.Content>
             <div className={styles.Content}>
@@ -74,9 +74,9 @@ const BasicDetail = props => {
               </Form>
             </div>
           </Card.Content>
-        </Card>
+        </Card> */}
         <Card free>
-          <Card.Header title="目标公司" />
+          <Card.Header title="工作信息" />
           <Card.Divider />
           <Card.Content>
             <div className={styles.Content}>
@@ -85,10 +85,32 @@ const BasicDetail = props => {
                 hasBorder={false}
                 className={styles.Table}
               >
-                <Table.Column title="目标公司" dataIndex="targetCompany" />
-                <Table.Column title="主营业务" dataIndex="business" />
-                <Table.Column title="注册地" dataIndex="address" />
-                <Table.Column title="创始人" dataIndex="creator" />
+                <Table.Column title="部门" dataIndex="targetCompany" />
+                <Table.Column title="岗位序列" dataIndex="business" />
+                <Table.Column title="岗位" dataIndex="address" />
+                <Table.Column title="岗位等级" dataIndex="creator" />
+              </Table>
+            </div>
+          </Card.Content>
+        </Card>
+
+        <Card free>
+          <Card.Header title="学历信息" />
+          <Card.Divider />
+          <Card.Content>
+            <div className={styles.Content}>
+              <Table
+                dataSource={dataSource.targetCompanys}
+                hasBorder={false}
+                className={styles.Table}
+              >
+                <Table.Column title="入学日期" dataIndex="targetCompany" />
+                <Table.Column title="毕业日期" dataIndex="business" />
+                <Table.Column title="学校" dataIndex="address" />
+                <Table.Column title="专业" dataIndex="creator" />
+                <Table.Column title="学历" dataIndex="creator" />
+                <Table.Column title="学位" dataIndex="creator" />
+                <Table.Column title="学习方式" dataIndex="creator" />
               </Table>
             </div>
           </Card.Content>

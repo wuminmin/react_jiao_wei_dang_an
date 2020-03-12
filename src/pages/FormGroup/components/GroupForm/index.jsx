@@ -624,9 +624,14 @@ const GroupForm = props => {
             <Form.Item colSpan={4} label="籍贯" required>
               <Input name="hometown" placeholder="请输入" />
             </Form.Item>
-
+         
             <Form.Item colSpan={4} label="政治面貌" required>
-              <Input name="politicalStatus" placeholder="请输入" />
+              <Select name="politicalStatus" id="relativeId" placeholder="请选择">
+                <Select.Option value={1}>团员</Select.Option>
+                <Select.Option value={2}>党员</Select.Option>
+                <Select.Option value={3}>群众</Select.Option>
+                <Select.Option value={4}>其他</Select.Option>
+              </Select>
             </Form.Item>
 
             <Form.Item colSpan={4} label="入党日期" required>
@@ -641,8 +646,8 @@ const GroupForm = props => {
               <Select name="gender" id="relativeId" placeholder="请选择">
                 <Select.Option value={1}>未婚</Select.Option>
                 <Select.Option value={2}>已婚</Select.Option>
-                <Select.Option value={2}>离异</Select.Option>
-                <Select.Option value={2}>丧偶</Select.Option>
+                <Select.Option value={3}>离异</Select.Option>
+                <Select.Option value={4}>丧偶</Select.Option>
               </Select>
             </Form.Item>
 
@@ -677,6 +682,7 @@ const GroupForm = props => {
           </Form>
         </Card.Content>
       </Card>
+      
       <Card ref={containerRef} free className={styles.Card}>
         <Card.Header title="工作信息" />
         <Card.Divider />

@@ -95,12 +95,17 @@ const AdvancedDetail = props => {
                 </Box>
                 <Box spacing={8} direction="row">
                   <Button type="primary" className={styles.button}>
-                    主操作
+                  基本信息
                   </Button>
-                  <Button className={styles.button}>操作一</Button>
+                  <Button className={styles.button}>工作信息</Button>
+                  <Button className={styles.button}>学历信息</Button>
                   <MenuButton label="更多" className={styles.button}>
-                    <MenuButton.Item key="1">操作一</MenuButton.Item>
-                    <MenuButton.Item key="2">操作二</MenuButton.Item>
+                    <MenuButton.Item key="1">工作履历</MenuButton.Item>
+                    <MenuButton.Item key="2">考核信息</MenuButton.Item>
+                    <MenuButton.Item key="3">家庭信息</MenuButton.Item>
+                    <MenuButton.Item key="4">专业技术职务</MenuButton.Item>
+                    <MenuButton.Item key="5">职业资格名称</MenuButton.Item>
+                    <MenuButton.Item key="6">奖励情况</MenuButton.Item>
                   </MenuButton>
                 </Box>
               </Box>
@@ -126,7 +131,7 @@ const AdvancedDetail = props => {
               </Form>
             </Box>
           </Box>
-          <Tab navClassName={styles.TabBar} onChange={onTabChange}>
+          {/* <Tab navClassName={styles.TabBar} onChange={onTabChange}>
             <Tab.Item
               title={<span className={styles.TabItemTitle}>选项卡一</span>}
               key="1"
@@ -138,11 +143,11 @@ const AdvancedDetail = props => {
               className={styles.TabItem}
             />
             <Tab.Item title={<span className={styles.TabItemTitle}>选项卡三</span>} key="3" />
-          </Tab>
+          </Tab> */}
         </Box>
       </Card>
       <Box spacing={20}>
-        <Card contentHeight="auto">
+        {/* <Card contentHeight="auto">
           <Step shape="dot" current={1} className={styles.Step}>
             <Step.Item
               title="申请"
@@ -163,7 +168,7 @@ const AdvancedDetail = props => {
             <Step.Item title="入职准备" />
             <Step.Item title="完成" />
           </Step>
-        </Card>
+        </Card> */}
         <Card free>
           <Card.Header title="基础信息" />
           <Card.Divider />

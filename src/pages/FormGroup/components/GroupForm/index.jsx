@@ -21,10 +21,19 @@ const DEFAULT_DATA = {
   company: [
     {
       id: '1',
-      name: '蚂蚁证券投资有限公司 A',
+      name: '',
       business: '金融证券代理',
       address: '1569 Cronin Ways Apt. 082',
       creatorName: '欧鹏',
+
+      enrollment_date:'2007-09-01',
+      graduation_date:'2011-07-01',
+      school:'清华大学',
+      profession:'计算机科学与技术',
+      education:'研究生',
+      bachelor_of_Science:'硕士',
+      learning_method:'学习方式',
+
     },
     {
       id: '2',
@@ -32,6 +41,15 @@ const DEFAULT_DATA = {
       business: '金融证券代理',
       address: '4016 Kautzer Route Suite 366',
       creatorName: '阮小五',
+
+      enrollment_date:'2007-09-01',
+      graduation_date:'2011-07-01',
+      school:'清华大学',
+      profession:'计算机科学与技术',
+      education:'研究生',
+      bachelor_of_Science:'硕士',
+      learning_method:'学习方式',
+
     },
     {
       id: '3',
@@ -39,6 +57,14 @@ const DEFAULT_DATA = {
       business: '金融证券代理',
       address: '22 Haag Manor',
       creatorName: '阮小二',
+
+      enrollment_date:'2007-09-01',
+      graduation_date:'2011-07-01',
+      school:'清华大学',
+      profession:'计算机科学与技术',
+      education:'研究生',
+      bachelor_of_Science:'硕士',
+      learning_method:'学习方式',
     },
     {
       id: '4',
@@ -46,35 +72,45 @@ const DEFAULT_DATA = {
       business: '金融证券代理',
       address: '1014 McLaughlin Unions',
       creatorName: '阮小七',
+
+      enrollment_date:'2007-09-01',
+      graduation_date:'2011-07-01',
+      school:'清华大学',
+      profession:'计算机科学与技术',
+      education:'研究生',
+      bachelor_of_Science:'硕士',
+      learning_method:'学习方式',
+    }
+  ],
+  resume:[
+    {
+      id: '1',
+      resume_start_date:'2007-09-01',
+      resume_end_date:'2011-07-01',
+      employer:'北京大学',
+      working_department:'图书馆',
+      job:'管理员',
+      position:'管理员',
     },
     {
-      id: '5',
-      name: '蚂蚁证券投资有限公司 E',
-      business: '金融证券代理',
-      address: '8748 Devante Center',
-      creatorName: '公孙胜',
+      id: '2',
+      resume_start_date:'2007-09-01',
+      resume_end_date:'2011-07-01',
+      employer:'北京大学',
+      working_department:'图书馆',
+      job:'管理员',
+      position:'管理员',
     },
     {
-      id: '6',
-      name: '蚂蚁证券投资有限公司 F',
-      business: '金融证券代理',
-      address: '1014 McLaughlin Unions',
-      creatorName: '曹正',
+      id: '3',
+      resume_start_date:'2007-09-01',
+      resume_end_date:'2011-07-01',
+      employer:'北京大学',
+      working_department:'图书馆',
+      job:'管理员',
+      position:'管理员',
     },
-    {
-      id: '7',
-      name: '蚂蚁证券投资有限公司 G',
-      business: '金融证券代理',
-      address: '8748 Devante Center',
-      creatorName: '李立',
-    },
-    {
-      id: '8',
-      name: '蚂蚁证券投资有限公司 H',
-      business: '金融证券代理',
-      address: '1569 Cronin Ways Apt. 082',
-      creatorName: '樊瑞',
-    },
+
   ],
 };
 
@@ -108,20 +144,40 @@ const GroupForm = props => {
     setDataSouce({ ...dataSource, company });
   };
 
+  const changeRowData_resume = (index, key, value) => {
+    const resume = [...dataSource.resume];
+    resume[index][key] = value;
+    setDataSouce({ ...dataSource, resume });
+  };
+
   const deleteRow = index => {
     const company = [...dataSource.company];
-
     if (!company[index].id) {
       company.splice(index, 1);
       setDataSouce({ ...dataSource, company });
       return;
     }
-
     Dialog.confirm({
       content: `确定要删除公司：${company[index].name} ?`,
       onOk: () => {
         company.splice(index, 1);
         setDataSouce({ ...dataSource, company });
+      },
+    });
+  };
+
+  const deleteRow_resume = index => {
+    const resume = [...dataSource.resume];
+    if (!resume[index].id) {
+      resume.splice(index, 1);
+      setDataSouce({ ...dataSource, resume });
+      return;
+    }
+    Dialog.confirm({
+      content: `确定要删除：${resume[index].employer} ?`,
+      onOk: () => {
+        resume.splice(index, 1);
+        setDataSouce({ ...dataSource, resume });
       },
     });
   };
@@ -137,12 +193,24 @@ const GroupForm = props => {
       ],
     });
   };
+  const addRow_resume = () => {
+    setDataSouce({
+      ...dataSource,
+      resume: [
+        ...dataSource.resume,
+        {
+          edited: true,
+        },
+      ],
+    });
+  };
 
   const submit = () => {
     onSubmit({
       basic: basicField.getValues(),
       member: memberField.getValues(),
       company: dataSource.company,
+      resume:dataSource.resume,
     });
   };
 
@@ -158,7 +226,21 @@ const GroupForm = props => {
         />
       );
     }
+    return v;
+  };
 
+  const renderEditCell_resume = (v, i, row, key) => {
+    if (row.edited) {
+      return (
+        <Input
+          style={{
+            width: '100%',
+          }}
+          onChange={value => changeRowData_resume(i, key, value)}
+          value={v || ''}
+        />
+      );
+    }
     return v;
   };
 
@@ -278,51 +360,9 @@ const GroupForm = props => {
           </Form>
         </Card.Content>
       </Card>
+    
       <Card free className={styles.Card}>
         <Card.Header title="学历信息" />
-        <Card.Divider />
-        <Card.Content>
-          <Form field={memberField} responsive fullWidth labelAlign="top">
-            <Form.Item colSpan={4} label="合同类型" required>
-              <Select name="contractType" placeholder="请选择合同类型">
-                <Select.Option value={1}>合同一</Select.Option>
-                <Select.Option value={2}>合同二</Select.Option>
-                <Select.Option value={3}>合同三</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item colSpan={4} label="IC成员" required>
-              <Select name="icMemberId" placeholder="请选择IC成员">
-                <Select.Option value={1}>成员一</Select.Option>
-                <Select.Option value={2}>成员二</Select.Option>
-                <Select.Option value={3}>成员三</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item colSpan={4} label="法务评审会" required>
-              <Select name="forensicId" placeholder="请选择法务评审">
-                <Select.Option value={1}>法务一</Select.Option>
-                <Select.Option value={2}>法务二</Select.Option>
-                <Select.Option value={3}>法务三</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item colSpan={4} label="财务评审" required>
-              <Select name="financeId" placeholder="请选择财务评审">
-                <Select.Option value={1}>财务一</Select.Option>
-                <Select.Option value={2}>财务二</Select.Option>
-                <Select.Option value={3}>财务三</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item colSpan={4} label="项目评审" required>
-              <Select name="projectId" placeholder="请选择项目评审">
-                <Select.Option value={1}>项目一</Select.Option>
-                <Select.Option value={2}>项目二</Select.Option>
-                <Select.Option value={3}>项目三</Select.Option>
-              </Select>
-            </Form.Item>
-          </Form>
-        </Card.Content>
-      </Card>
-      <Card free className={styles.Card}>
-        <Card.Header title="基础信息" />
         <Card.Divider />
         <Card.Content>
           <Box direction="row" margin={[0, 0, 16, 0]}>
@@ -333,24 +373,39 @@ const GroupForm = props => {
           </Box>
           <Table dataSource={dataSource.company} hasBorder={false} className={styles.Table}>
             <Table.Column
-              title="目标公司"
-              cell={(v, i, row) => renderEditCell(v, i, row, 'name')}
-              dataIndex="name"
+              title="入学日期"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'enrollment_date')}
+              dataIndex="enrollment_date"
             />
             <Table.Column
-              title="主营业务"
-              cell={(v, i, row) => renderEditCell(v, i, row, 'business')}
-              dataIndex="business"
+              title="毕业日期"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'graduation_date')}
+              dataIndex="graduation_date"
             />
             <Table.Column
-              title="注册地"
-              cell={(v, i, row) => renderEditCell(v, i, row, 'address')}
-              dataIndex="address"
+              title="学校"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'school')}
+              dataIndex="school"
             />
             <Table.Column
-              title="创始人"
-              cell={(v, i, row) => renderEditCell(v, i, row, 'creatorName')}
-              dataIndex="creatorName"
+              title="专业"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'profession')}
+              dataIndex="profession"
+            />
+             <Table.Column
+              title="学历"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'education')}
+              dataIndex="education"
+            />
+              <Table.Column
+              title="学位"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'bachelor_of_Science')}
+              dataIndex="bachelor_of_Science"
+            />
+               <Table.Column
+              title="学习方式"
+              cell={(v, i, row) => renderEditCell(v, i, row, 'learning_method')}
+              dataIndex="learning_method"
             />
             <Table.Column
               title="操作"
@@ -378,12 +433,12 @@ const GroupForm = props => {
                     <Button type="primary" text onClick={() => deleteRow(i)}>
                       删除
                     </Button>
-                    <Divider direction="ver" />
+                    {/* <Divider direction="ver" />
                     <MenuButton type="primary" popupTriggerType="hover" label="更多" text>
                       <MenuButton.Item>操作一</MenuButton.Item>
                       <MenuButton.Item>操作二</MenuButton.Item>
                       <MenuButton.Item>操作三</MenuButton.Item>
-                    </MenuButton>
+                    </MenuButton> */}
                   </div>
                 );
               }}
@@ -391,6 +446,90 @@ const GroupForm = props => {
           </Table>
         </Card.Content>
       </Card>
+
+      <Card free className={styles.Card}>
+        <Card.Header title="工作履历" />
+        <Card.Divider />
+        <Card.Content>
+          <Box direction="row" margin={[0, 0, 16, 0]}>
+            <Button onClick={addRow_resume} className={styles.Button} type="primary">
+              {' '}
+              新增
+            </Button>
+          </Box>
+          <Table dataSource={dataSource.resume} hasBorder={false} className={styles.Table}>
+            <Table.Column
+              title="履历开始日期"
+              cell={(v, i, row) => renderEditCell_resume(v, i, row, 'resume_start_date')}
+              dataIndex="resume_start_date"
+            />
+            <Table.Column
+              title="履历结束日期"
+              cell={(v, i, row) => renderEditCell_resume(v, i, row, 'resume_end_date')}
+              dataIndex="resume_end_date"
+            />
+            <Table.Column
+              title="工作单位"
+              cell={(v, i, row) => renderEditCell_resume(v, i, row, 'employer')}
+              dataIndex="employer"
+            />
+            <Table.Column
+              title="所在部门"
+              cell={(v, i, row) => renderEditCell_resume(v, i, row, 'working_department')}
+              dataIndex="working_department"
+            />
+             <Table.Column
+              title="岗位"
+              cell={(v, i, row) => renderEditCell_resume(v, i, row, 'job')}
+              dataIndex="job"
+            />
+              <Table.Column
+              title="职务"
+              cell={(v, i, row) => renderEditCell_resume(v, i, row, 'position')}
+              dataIndex="position"
+            />
+            <Table.Column
+              title="操作"
+              cell={(v, i, row) => {
+                if (row.edited) {
+                  return (
+                    <div>
+                      <Button text type="primary" onClick={() => changeRowData_resume(i, 'edited', false)}>
+                        保存
+                      </Button>
+                      <Divider direction="ver" />
+                      <Button text type="primary" onClick={() => deleteRow_resume(i)}>
+                        删除
+                      </Button>
+                    </div>
+                  );
+                }
+                return (
+                  <div>
+                    <Button type="primary" onClick={() => changeRowData_resume(i, 'edited', true)} text>
+                      编辑
+                    </Button>
+                    <Divider direction="ver" />
+                    <Button type="primary" text onClick={() => deleteRow_resume(i)}>
+                      删除
+                    </Button>
+                    {/* <Divider direction="ver" />
+                    <MenuButton type="primary" popupTriggerType="hover" label="更多" text>
+                      <MenuButton.Item>操作一</MenuButton.Item>
+                      <MenuButton.Item>操作二</MenuButton.Item>
+                      <MenuButton.Item>操作三</MenuButton.Item>
+                    </MenuButton> */}
+                  </div>
+                );
+              }}
+            />
+          </Table>
+        </Card.Content>
+      </Card>
+
+
+
+
       <Box
         direction="row"
         spacing={16}
